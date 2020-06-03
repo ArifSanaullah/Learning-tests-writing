@@ -40,8 +40,8 @@ describe("#Person", () => {
       const rollDiceSamples = _.map(samples, (item) => Person.rollDice(1, 20));
 
       const anyZeros = _.filter(rollDiceSamples, (item) => item === 0);
-    //   anyZeros.length.should.equal(0);
-        // above test will fail almost all the time. Uncomment above line and see the result.
+      // anyZeros.length.should.equal(0);
+      // above test will fail almost all the time. Uncomment above line and see the result.
     });
   });
 
@@ -77,6 +77,18 @@ describe("#Person", () => {
 
     it("personB's armorBonus is 0", () => {
       personB.armorBonus.should.equal(0);
+    });
+
+    it("if I add a boomstick to my equipment then in should be in equipment array", () => {
+      const boomStick = new Weapon("Boom Stick", 0, 1, 12);
+      personA.addEquipment(boomStick);
+      personA.equipment.should.include(boomStick);
+    });
+
+    it("if I add a hotPants to personA, he becomes awesome", () => {
+      const hotPants = new Armor("Hot Pants", 1);
+      personA.addEquipment(hotPants);
+      personA.armorBonus.should.equal(3);
     });
   });
 });
