@@ -1,7 +1,16 @@
 const expect = require("chai").expect;
 const should = require("chai").should();
 const _ = require("lodash");
-const { getPerson, Person, Armor, Weapon } = require("./index");
+const {
+  getPerson,
+  Person,
+  Armor,
+  Weapon,
+  getRandomNumber,
+  rollDice,
+  getNotARandomNumber,
+  attack,
+} = require("./index");
 
 describe("#mocha chai basics", () => {
   //unit test'll go here
@@ -90,5 +99,37 @@ describe("#Person", () => {
       personA.addEquipment(hotPants);
       personA.armorBonus.should.equal(3);
     });
+  });
+});
+
+describe("#getRandomNumber", () => {
+  it("should return a finite number", () => {
+    const number = getRandomNumber();
+    _.isFinite(number).should.be.true;
+  });
+});
+
+describe("#rollDice", () => {
+  it("should return a finite number", () => {
+    const result = rollDice(1, 20);
+    _.isFinite(result).should.be.true;
+  });
+  it("should NOT be a random number if we use 1", () => {
+    const result = rollDice(1, 20, getNotARandomNumber);
+    result.should.equal(20);
+  });
+});
+
+describe("#getNotARandomNumber", () => {
+  it("Should always return 1", () => {
+    getNotARandomNumber().should.be.equal(1);
+  });
+});
+
+describe("#attack", () => {
+  it("should always be a hit if 20 rolled", () => {
+    const rolldice = () => 20;
+    const result = attack(rolldice, getNotARandomNumber, 0, 0, 0);
+    result.hit.should.be.true;
   });
 });

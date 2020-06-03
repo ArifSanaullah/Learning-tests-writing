@@ -1,5 +1,34 @@
 const _ = require("lodash");
 
+const getRandomNumber = () => Math.random();
+const getNotARandomNumber = () => 1;
+const rollDice = (howMany, type, randomNumberFunction = getRandomNumber) => {
+  let total = 0;
+  for (let i = 0; i < howMany; i++) {
+    total += Math.round(randomNumberFunction() * type);
+  }
+  return total;
+};
+
+const attack = (
+  rollDice,
+  randomNumberGenerator,
+  attackersStrength,
+  targetArmorBonus,
+  targetDexterity
+) => {
+  let roll = rollDice(1, 20, randomNumberGenerator);
+  roll += attackersStrength;
+  roll = _.clamp(roll, 1, 20);
+  const toHit = 10 + targetArmorBonus + targetDexterity;
+  const hit = roll >= toHit;
+  return {
+    roll,
+    hit,
+    toHit,
+  };
+};
+
 class Person {
   constructor(name, strength, dexterity, constitution, equipment) {
     this.name = name;
@@ -21,7 +50,7 @@ class Person {
   }
 
   attack(target) {
-    const roll = Person.rollDice(1, 20);
+    let roll = Person.rollDice(1, 20);
     roll += this.strength;
     roll = _.clamp(roll, 1, 20);
     const toHit = 10 + target.armorBonus + target.dexterity;
@@ -91,4 +120,8 @@ module.exports = {
   Person,
   Armor,
   Weapon,
+  getRandomNumber,
+  rollDice,
+  getNotARandomNumber,
+  attack,
 };
