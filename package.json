@@ -1,0 +1,27 @@
+{
+  "name": "learning-tests-writing",
+  "version": "1.0.0",
+  "description": "Learning how to writes test(unit testing) with JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha index.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArifSanaullah/Learning-tests-writing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArifSanaullah/Learning-tests-writing/issues"
+  },
+  "homepage": "https://github.com/ArifSanaullah/Learning-tests-writing#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.2.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}
