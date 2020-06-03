@@ -89,4 +89,6 @@ const getPerson = () => person;
 module.exports = {
   getPerson,
   Person,
+  Armor,
+  Weapon,
 };
